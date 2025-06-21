@@ -59,8 +59,9 @@ int main() {
     pibPerCapita2 = pib2 / populacao2;
 
     // Exibição das Cartas:
-     printf("\n=========================== Carta 1 ===================================\n");
-    printf("\nCarta 1:\n");
+    printf("\n=========================== Carta 1 ===================================\n");
+    // Exibição da Carta 1:
+    printf("\nCarta 1\n");
     printf("Código: %s\n", codigoCarta1);
     printf("Nome da Cidade: %s\n", nomeCidade1);
     printf("Estado: %s\n", estado1);
@@ -70,8 +71,9 @@ int main() {
     printf("Ponto Turístico: %d\n", pontoTuristico1);
     printf("Densidade: %.2f hab/km²\n", densidade1);
     printf("PIB per Capita: %.2f\n", pibPerCapita1);
+    // Exibição da Carta 2:
     printf("\n=========================== Carta 2 ===================================\n");
-    printf("\nCarta 2:\n");
+    printf("\nCarta 2\n");
     printf("Código: %s\n", codigoCarta2);
     printf("Nome da Cidade: %s\n", nomeCidade2);
     printf("Estado: %s\n", estado2);
@@ -84,143 +86,369 @@ int main() {
     
 
     // Comparação das Cartas:
-
-    printf("Escolaha o critério de comparação:\n");
+    // Solicitação do critério de comparação
+    printf("\n=========================== Critério de Comparação ===================================\n");
+    // Exibição das opções de comparação
+    printf("Escolha o critério de comparação:\n");
     printf("1. População\n");
     printf("2. Área\n");
     printf("3. PIB\n");
     printf("4. Pontos Turísticos\n");
     printf("5. Densidade Populacional\n");
     printf("6. PIB per Capita\n");
-    int criterio;
-    scanf("%d", &criterio);
-    printf("\n=========================== Comparação ===================================\n");
+    
+    // Leitura do critério escolhido pelo usuário
+    printf("\n=========================== Escolha do Critério ===================================\n");
+    int criterio1, criterio2, criterio3; // Variáveis para armazenar os critérios escolhidos
+
+    int pontos1 = 0, pontos2 = 0; // Variáveis para armazenar os pontos de cada carta
+    char*vencedorRodada = NULL; // Variável para armazenar o vencedor da comparação
+
+    printf("Digite o critério da Rodada 1 (1-6): ");
+    scanf("%d", &criterio1);
+    printf("Digite o critério da Rodada 2 (1-6): ");
+    scanf("%d", &criterio2);
+    printf("Digite o critério da Rodada 3 (1-6): ");
+    scanf("%d", &criterio3);
+    
+    // Verificação dos critérios escolhidos
+    if (criterio1 < 1 || criterio1 > 6 || criterio2 < 1 || criterio2 > 6 || criterio3 < 1 || criterio3 > 6) {
+        printf("Critério inválido. Por favor, escolha um critério válido entre 1 e 6.\n");
+        return 1; // Encerra o programa se os critérios forem inválidos
+    }
 
     // Exibição do critério escolhido
-    printf("Comparando as cartas...\n");//
-    switch (criterio)
-    {
-    case 1:
-        printf("\n========================= População =====================================\n");
-        printf("Critério escolhido: População\n");
-        printf("População de %s: %d\n", nomeCidade1, populacao1);
-        printf("População de %s: %d\n", nomeCidade2, populacao2);
-        // Comparação de População
-        if (populacao1 > populacao2)
+    printf("\n=========================== Rodada 1 ===================================\n");
+    switch (criterio1) // Verifica o critério escolhido
         {
-            printf("%s tem maior população.\n", nomeCidade1);
-        }
-        else if (populacao1 < populacao2)
-        {
-            printf("%s tem maior população.\n", nomeCidade2);
-        }
-        else
-        {
-            printf("As duas cidades têm a mesma população.\n");
-        }
-        break;
-    case 2:
-        printf("\n=========================== Área ===================================\n");
-        printf("Critério escolhido: Área\n");
-        printf("Área de %s: %.2f km²\n", nomeCidade1, area1);
-        printf("Área de %s: %.2f km²\n", nomeCidade2, area2);
-        // Comparação de Área
-        if (area1 > area2)
-        {
-            printf("%s tem maior área.\n", nomeCidade1);
-        }
-        else if (area1 < area2)
-        {
-            printf("%s tem maior área.\n", nomeCidade2);
-        }
-        else
-        {
-            printf("As duas cidades têm a mesma área.\n");
+        case 1:
+            printf("\n========================= População =====================================\n");
+            printf("Critério escolhido: População\n");
+            printf("População de %s: %d\n", nomeCidade1, populacao1);
+            printf("População de %s: %d\n", nomeCidade2, populacao2);
+            // Comparação de População
+            (populacao1 > populacao2) ? // Se a população da cidade 1 for maior que a da cidade 2
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior população.\n", nomeCidade1)):// Se a população da cidade 1 for menor que a da cidade 2
+            (populacao1 < populacao2) ? // Se a população da cidade 1 for menor que a da cidade 2    
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior população.\n", nomeCidade2)):// Se as populações forem iguais
+                // Se as populações forem iguais
+                printf("As duas cidades têm a mesma população.\n");
+
+                break;
+        case 2:
+            printf("\n=========================== Área ===================================\n");
+            printf("Critério escolhido: Área\n");
+            printf("Área de %s: %.2f km²\n", nomeCidade1, area1);
+            printf("Área de %s: %.2f km²\n", nomeCidade2, area2);
+                // Comparação de Área
+            (area1 > area2) ?
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior área.\n", nomeCidade1)) :
+            (area1 < area2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior área.\n", nomeCidade2)) :
+
+                printf("As duas cidades têm a mesma área.\n");
+            
+                break;
+        case 3:
+            printf("\n=========================== PIB ===================================\n");
+            printf("Critério escolhido: PIB\n");
+            printf("PIB de %s: %.2f milhões\n", nomeCidade1, pib1);
+            printf("PIB de %s: %.2f milhões\n", nomeCidade2, pib2);
+            // Comparação de PIB
+            (pib1 > pib2) ?
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior PIB.\n", nomeCidade1)) :
+            (pib1 < pib2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior PIB.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm o mesmo PIB.\n");
+                
+                break;
+        case 4:
+            printf("\n=========================== Pontos Turísticos ===================================\n");
+            printf("Critério escolhido: Pontos Turísticos\n");
+            printf("Pontos turísticos de %s: %d\n", nomeCidade1, pontoTuristico1);
+            printf("Pontos turísticos de %s: %d\n", nomeCidade2, pontoTuristico2);
+            // Comparação de Pontos Turísticos
+            (pontoTuristico1 > pontoTuristico2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem mais pontos turísticos.\n", nomeCidade1)) :
+                
+            (pontoTuristico1 < pontoTuristico2)?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem mais pontos turísticos.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm o mesmo número de pontos turísticos.\n");
+                
+                break;
+                // Comparação de Densidade e PIB per Capita:
+        case 5:
+            printf("\n=========================== Densidade Populacional ===================================\n");
+            printf("Critério escolhido: Densidade Populacional\n");
+            printf("Densidade de %s: %.2f hab/km²\n", nomeCidade1, densidade1);
+            printf("Densidade de %s: %.2f hab/km²\n", nomeCidade2, densidade2);
+
+            // Comparação de Densidade Populacional
+            (densidade1 < densidade2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem menor densidade populacional.\n", nomeCidade1)) :
+                
+            (densidade1 > densidade2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem menor densidade populacional.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm a mesma densidade populacional.\n");
+                
+                break;
+        case 6:
+            printf("\n=========================== PIB per Capita ===================================\n");
+            printf("Critério escolhido: PIB per Capita\n");
+            printf("PIB per Capita de %s: %.2f\n", nomeCidade1, pibPerCapita1);
+            printf("PIB per Capita de %s: %.2f\n", nomeCidade2, pibPerCapita2);
+            // Comparação de PIB per Capita
+            (pibPerCapita1 > pibPerCapita2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior PIB per capita.\n", nomeCidade1)) :
+
+            (pibPerCapita1 < pibPerCapita2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior PIB per capita.\n", nomeCidade2)):
+                
+                printf("As duas cidades têm o mesmo PIB per capita.\n");
+                
+                break;
+
+        default:
+             printf("Opção inválida. Por favor, escolha um critério válido.\n");
+                break;
         }
 
-        break;
-    case 3:
-        printf("\n=========================== PIB ===================================\n");
-        printf("Critério escolhido: PIB\n");
-        printf("PIB de %s: %.2f milhões\n", nomeCidade1, pib1);
-        printf("PIB de %s: %.2f milhões\n", nomeCidade2, pib2);
-        // Comparação de PIB
-        if (pib1 > pib2)
+    
+    printf("\n=========================== Rodada 2 ===================================\n");
+    switch (criterio2) // Verifica o critério escolhido
         {
-            printf("%s tem maior PIB.\n", nomeCidade1);
-        }
-        else if (pib1 < pib2)
-        {
-            printf("%s tem maior PIB.\n", nomeCidade2);
-        }
-        else
-        {
-            printf("As duas cidades têm o mesmo PIB.\n");
-        }
-        break;
-    case 4:
-        printf("\n=========================== Pontos Turísticos ===================================\n");
-        printf("Critério escolhido: Pontos Turísticos\n");
-        printf("Pontos turísticos de %s: %d\n", nomeCidade1, pontoTuristico1);
-        printf("Pontos turísticos de %s: %d\n", nomeCidade2, pontoTuristico2);
-        // Comparação de Pontos Turísticos
-        if (pontoTuristico1 > pontoTuristico2)
-        {
-            printf("%s tem mais pontos turísticos.\n", nomeCidade1);
-        }
-        else if (pontoTuristico1 < pontoTuristico2)
-        {
-            printf("%s tem mais pontos turísticos.\n", nomeCidade2);
-        }
-        else
-        {
-            printf("As duas cidades têm o mesmo número de pontos turísticos.\n");
-        }
-        break;
-        // Comparação de Densidade e PIB per Capita:
-    case 5:
-        printf("\n=========================== Densidade Populacional ===================================\n");
-        printf("Critério escolhido: Densidade Populacional\n");
-        printf("Densidade de %s: %.2f hab/km²\n", nomeCidade1, densidade1);
-        printf("Densidade de %s: %.2f hab/km²\n", nomeCidade2, densidade2);
-        // Comparação de Densidade Populacional
-        if (densidade1 < densidade2)
-        {
-            printf("%s tem menor densidade populacional.\n", nomeCidade1);
-        }
-        else if (densidade1 > densidade2)
-        {
-            printf("%s tem menor densidade populacional.\n", nomeCidade2);
-        }
-        else
-        {
-            printf("As duas cidades têm a mesma densidade populacional.\n");
-        }
-        break;
-    case 6:
-        printf("\n=========================== PIB per Capita ===================================\n");
-        printf("Critério escolhido: PIB per Capita\n");
-        printf("PIB per Capita de %s: %.2f\n", nomeCidade1, pibPerCapita1);
-        printf("PIB per Capita de %s: %.2f\n", nomeCidade2, pibPerCapita2);
-        // Comparação de PIB per Capita
-        if (pibPerCapita1 > pibPerCapita2)
-        {
-            printf("%s tem maior PIB per capita.\n", nomeCidade1);
-        }
-        else if (pibPerCapita1 < pibPerCapita2)
-        {
-            printf("%s tem maior PIB per capita.\n", nomeCidade2);
-        }
-        else
-        {
-            printf("As duas cidades têm o mesmo PIB per capita.\n");
-        }
-        break;
+        case 1:
+            printf("\n========================= População =====================================\n");
+            printf("Critério escolhido: População\n");
+            printf("População de %s: %d\n", nomeCidade1, populacao1);
+            printf("População de %s: %d\n", nomeCidade2, populacao2);
+            // Comparação de População
+            (populacao1 > populacao2) ? // Se a população da cidade 1 for maior que a da cidade 2
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior população.\n", nomeCidade1)):// Se a população da cidade 1 for menor que a da cidade 2
+            (populacao1 < populacao2) ? // Se a população da cidade 1 for menor que a da cidade 2    
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior população.\n", nomeCidade2)):// Se as populações forem iguais
+                // Se as populações forem iguais
+                printf("As duas cidades têm a mesma população.\n");
 
-    default:
-        printf("Opção inválida. Por favor, escolha um critério válido.\n");
-        break;
-    }
+                break;
+        case 2:
+            printf("\n=========================== Área ===================================\n");
+            printf("Critério escolhido: Área\n");
+            printf("Área de %s: %.2f km²\n", nomeCidade1, area1);
+            printf("Área de %s: %.2f km²\n", nomeCidade2, area2);
+                // Comparação de Área
+            (area1 > area2) ?
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior área.\n", nomeCidade1)) :
+            (area1 < area2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior área.\n", nomeCidade2)) :
+
+                printf("As duas cidades têm a mesma área.\n");
+            
+                break;
+        case 3:
+            printf("\n=========================== PIB ===================================\n");
+            printf("Critério escolhido: PIB\n");
+            printf("PIB de %s: %.2f milhões\n", nomeCidade1, pib1);
+            printf("PIB de %s: %.2f milhões\n", nomeCidade2, pib2);
+            // Comparação de PIB
+            (pib1 > pib2) ?
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior PIB.\n", nomeCidade1)) :
+            (pib1 < pib2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior PIB.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm o mesmo PIB.\n");
+                
+                break;
+        case 4:
+            printf("\n=========================== Pontos Turísticos ===================================\n");
+            printf("Critério escolhido: Pontos Turísticos\n");
+            printf("Pontos turísticos de %s: %d\n", nomeCidade1, pontoTuristico1);
+            printf("Pontos turísticos de %s: %d\n", nomeCidade2, pontoTuristico2);
+            // Comparação de Pontos Turísticos
+            (pontoTuristico1 > pontoTuristico2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem mais pontos turísticos.\n", nomeCidade1)) :
+                
+            (pontoTuristico1 < pontoTuristico2)?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem mais pontos turísticos.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm o mesmo número de pontos turísticos.\n");
+                
+                break;
+                // Comparação de Densidade e PIB per Capita:
+        case 5:
+            printf("\n=========================== Densidade Populacional ===================================\n");
+            printf("Critério escolhido: Densidade Populacional\n");
+            printf("Densidade de %s: %.2f hab/km²\n", nomeCidade1, densidade1);
+            printf("Densidade de %s: %.2f hab/km²\n", nomeCidade2, densidade2);
+
+            // Comparação de Densidade Populacional
+            (densidade1 < densidade2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem menor densidade populacional.\n", nomeCidade1)) :
+                
+            (densidade1 > densidade2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem menor densidade populacional.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm a mesma densidade populacional.\n");
+                
+                break;
+        case 6:
+            printf("\n=========================== PIB per Capita ===================================\n");
+            printf("Critério escolhido: PIB per Capita\n");
+            printf("PIB per Capita de %s: %.2f\n", nomeCidade1, pibPerCapita1);
+            printf("PIB per Capita de %s: %.2f\n", nomeCidade2, pibPerCapita2);
+            // Comparação de PIB per Capita
+            (pibPerCapita1 > pibPerCapita2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior PIB per capita.\n", nomeCidade1)) :
+
+            (pibPerCapita1 < pibPerCapita2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior PIB per capita.\n", nomeCidade2)):
+                
+                printf("As duas cidades têm o mesmo PIB per capita.\n");
+                
+                break;
+
+        default:
+             printf("Opção inválida. Por favor, escolha um critério válido.\n");
+                break;
+        }
+
+    printf("\n=========================== Rodada 3 ===================================\n");
+    switch (criterio3) // Verifica o critério escolhido
+        {
+        case 1:
+            printf("\n========================= População =====================================\n");
+            printf("Critério escolhido: População\n");
+            printf("População de %s: %d\n", nomeCidade1, populacao1);
+            printf("População de %s: %d\n", nomeCidade2, populacao2);
+            // Comparação de População
+            (populacao1 > populacao2) ? // Se a população da cidade 1 for maior que a da cidade 2
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior população.\n", nomeCidade1)):// Se a população da cidade 1 for menor que a da cidade 2
+            (populacao1 < populacao2) ? // Se a população da cidade 1 for menor que a da cidade 2    
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior população.\n", nomeCidade2)):// Se as populações forem iguais
+                // Se as populações forem iguais
+                printf("As duas cidades têm a mesma população.\n");
+
+                break;
+        case 2:
+            printf("\n=========================== Área ===================================\n");
+            printf("Critério escolhido: Área\n");
+            printf("Área de %s: %.2f km²\n", nomeCidade1, area1);
+            printf("Área de %s: %.2f km²\n", nomeCidade2, area2);
+                // Comparação de Área
+            (area1 > area2) ?
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior área.\n", nomeCidade1)) :
+            (area1 < area2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior área.\n", nomeCidade2)) :
+
+                printf("As duas cidades têm a mesma área.\n");
+            
+                break;
+        case 3:
+            printf("\n=========================== PIB ===================================\n");
+            printf("Critério escolhido: PIB\n");
+            printf("PIB de %s: %.2f milhões\n", nomeCidade1, pib1);
+            printf("PIB de %s: %.2f milhões\n", nomeCidade2, pib2);
+            // Comparação de PIB
+            (pib1 > pib2) ?
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior PIB.\n", nomeCidade1)) :
+            (pib1 < pib2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior PIB.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm o mesmo PIB.\n");
+                
+                break;
+        case 4:
+            printf("\n=========================== Pontos Turísticos ===================================\n");
+            printf("Critério escolhido: Pontos Turísticos\n");
+            printf("Pontos turísticos de %s: %d\n", nomeCidade1, pontoTuristico1);
+            printf("Pontos turísticos de %s: %d\n", nomeCidade2, pontoTuristico2);
+            // Comparação de Pontos Turísticos
+            (pontoTuristico1 > pontoTuristico2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem mais pontos turísticos.\n", nomeCidade1)) :
+                
+            (pontoTuristico1 < pontoTuristico2)?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem mais pontos turísticos.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm o mesmo número de pontos turísticos.\n");
+                
+                break;
+                // Comparação de Densidade e PIB per Capita:
+        case 5:
+            printf("\n=========================== Densidade Populacional ===================================\n");
+            printf("Critério escolhido: Densidade Populacional\n");
+            printf("Densidade de %s: %.2f hab/km²\n", nomeCidade1, densidade1);
+            printf("Densidade de %s: %.2f hab/km²\n", nomeCidade2, densidade2);
+
+            // Comparação de Densidade Populacional
+            (densidade1 < densidade2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem menor densidade populacional.\n", nomeCidade1)) :
+                
+            (densidade1 > densidade2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem menor densidade populacional.\n", nomeCidade2)) :
+                
+                printf("As duas cidades têm a mesma densidade populacional.\n");
+                
+                break;
+        case 6:
+            printf("\n=========================== PIB per Capita ===================================\n");
+            printf("Critério escolhido: PIB per Capita\n");
+            printf("PIB per Capita de %s: %.2f\n", nomeCidade1, pibPerCapita1);
+            printf("PIB per Capita de %s: %.2f\n", nomeCidade2, pibPerCapita2);
+            // Comparação de PIB per Capita
+            (pibPerCapita1 > pibPerCapita2) ?
+                
+                (vencedorRodada = nomeCidade1, pontos1++, printf("%s tem maior PIB per capita.\n", nomeCidade1)) :
+
+            (pibPerCapita1 < pibPerCapita2) ?
+                
+                (vencedorRodada = nomeCidade2, pontos2++, printf("%s tem maior PIB per capita.\n", nomeCidade2)):
+                
+                printf("As duas cidades têm o mesmo PIB per capita.\n");
+                
+                break;
+
+        default:
+             printf("Opção inválida. Por favor, escolha um critério válido.\n");
+                break;
+        }
+    
+        
+    
+    printf("\n================= Resultado Final =================\n");
+    printf("Pontuação:\n%s: %d ponto(s)\n%s: %d ponto(s)\n", nomeCidade1, pontos1, nomeCidade2, pontos2);
+
+    if (pontos1 > pontos2)
+        printf("🏆 A cidade vencedora do jogo é: %s!\n", nomeCidade1);
+    else if (pontos2 > pontos1)
+        printf("🏆 A cidade vencedora do jogo é: %s!\n", nomeCidade2);
+    else
+        printf("🤝 Empate! Nenhuma cidade venceu mais rodadas.\n");
+
     printf("\n=========================== Fim da Comparação ===================================\n");
     // Finalização do programa
     return 0;
